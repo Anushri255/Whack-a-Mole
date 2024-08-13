@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Whack-a-Mole</title>
     <style>
+        /* styles.css */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -35,6 +36,9 @@
             border-radius: 50%;
             position: relative;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .mole {
@@ -42,9 +46,6 @@
             height: 80px;
             background-color: brown;
             border-radius: 50%;
-            position: absolute;
-            top: 10px;
-            left: 10px;
         }
     </style>
 </head>
@@ -65,7 +66,6 @@
     </div>
     <button id="startButton">Start Game</button>
     <script>
-        // script.js
         const holes = document.querySelectorAll('.hole');
         const scoreDisplay = document.getElementById('score');
         const startButton = document.getElementById('startButton');
@@ -106,7 +106,7 @@
             timer = setTimeout(() => {
                 clearTimeout(timer);
                 alert(`Game Over! Your final score is ${score}`);
-            }, 15000); 
+            }, 15000);
 
             showMole();
         }
@@ -121,6 +121,8 @@
             stopGame();
             startGame();
         });
+
+
 
     </script>
 </body>
