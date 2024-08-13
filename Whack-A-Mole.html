@@ -65,7 +65,62 @@
     </div>
     <button id="startButton">Start Game</button>
     <script>
+        // script.js
+        const holes = document.querySelectorAll('.hole');
+        const scoreDisplay = document.getElementById('score');
+        const startButton = document.getElementById('startButton');
+        let score = 0;
+        let activeMole;
+        let timer;
 
+        function randomHole() {
+            const index = Math.floor(Math.random() * holes.length);
+            return holes[index];
+        }
+
+        function showMole() {
+            const hole = randomHole();
+            hole.classList.add('mole');
+            activeMole = hole;
+
+            setTimeout(() => {
+                hole.classList.remove('mole');
+                if (timer) {
+                    showMole();
+                }
+            }, 800);
+        }
+
+        function whackMole(event) {
+            if (event.target === activeMole) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                activeMole.classList.remove('mole');
+                activeMole = null;
+            }
+        }
+
+        function startGame() {
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            timer = setTimeout(() => {
+                clearTimeout(timer);
+                alert(`Game Over! Your final score is ${score}`);
+            }, 15000); 
+
+            showMole();
+        }
+
+        function stopGame() {
+            clearTimeout(timer);
+            holes.forEach(hole => hole.classList.remove('mole'));
+        }
+
+        holes.forEach(hole => hole.addEventListener('click', whackMole));
+        startButton.addEventListener('click', () => {
+            stopGame();
+            startGame();
+        });
 
     </script>
 </body>
