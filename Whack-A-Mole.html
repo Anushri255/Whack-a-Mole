@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Whack-a-Mole</title>
     <style>
-        /* styles.css */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -16,7 +14,7 @@
             margin-top: 20px;
         }
 
-        #score {
+        #score, #missed {
             font-size: 24px;
             margin: 20px 0;
         }
@@ -53,6 +51,7 @@
 <body>
     <h1>Whack-a-Mole Game</h1>
     <div id="score">Score: 0</div>
+    <div id="missed">Missed: 0</div> 
     <div class="grid">
         <div class="hole" id="hole1"></div>
         <div class="hole" id="hole2"></div>
@@ -66,10 +65,13 @@
     </div>
     <button id="startButton">Start Game</button>
     <script>
+        // script.js
         const holes = document.querySelectorAll('.hole');
         const scoreDisplay = document.getElementById('score');
+        const missedDisplay = document.getElementById('missed');
         const startButton = document.getElementById('startButton');
         let score = 0;
+        let missed = 0;
         let activeMole;
         let timer;
 
@@ -84,11 +86,15 @@
             activeMole = hole;
 
             setTimeout(() => {
+                if (activeMole === hole) {
+                    missed++;
+                    missedDisplay.textContent = `Missed: ${missed}`;
+                }
                 hole.classList.remove('mole');
                 if (timer) {
                     showMole();
                 }
-            }, 800);
+            }, 800); // Mole stays up for 800ms
         }
 
         function whackMole(event) {
@@ -102,11 +108,13 @@
 
         function startGame() {
             score = 0;
+            missed = 0;
             scoreDisplay.textContent = `Score: ${score}`;
+            missedDisplay.textContent = `Missed: ${missed}`;
             timer = setTimeout(() => {
                 clearTimeout(timer);
-                alert(`Game Over! Your final score is ${score}`);
-            }, 15000);
+                alert(`Game Over! Your final score is ${score}. Missed attempts: ${missed}`);
+            }, 15000); 
 
             showMole();
         }
@@ -121,10 +129,6 @@
             stopGame();
             startGame();
         });
-
-
-
     </script>
 </body>
-
 </html>
