@@ -2,6 +2,8 @@
 
 A simple Whack-a-Mole game built using HTML, CSS, and JavaScript. The objective of the game is to hit (or "whack") as many moles as possible within a set time limit.
 
+## Hosted on https://anushri255.github.io/Whack-a-Mole.io/
+
 ## Features
 
 - **Score Tracking**: The game keeps track of the player's score based on how many moles they successfully whack.
